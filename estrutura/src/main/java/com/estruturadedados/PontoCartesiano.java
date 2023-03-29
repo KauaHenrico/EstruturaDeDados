@@ -10,6 +10,7 @@ public class PontoCartesiano {
         this.y = y;
     }
     
+    //getters e setters
     public double getX() {
         return x;
     }
@@ -26,9 +27,10 @@ public class PontoCartesiano {
         this.y = y;
     }
     
+    //método para calcular a distância euclidiana
     public double calcularDistanciaEuclidiana(PontoCartesiano outroPonto) {
-        double dx = this.x - outroPonto.x;
-        double dy = this.y - outroPonto.y;
-        return Math.sqrt(dx*dx + dy*dy);
+        double ax = this.x - outroPonto.x;
+        double by = this.y - outroPonto.y;
+        return Math.sqrt(Math.pow(ax, 2) + Math.pow(by, 2));
     }
 }
