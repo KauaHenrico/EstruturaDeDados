@@ -1,29 +1,118 @@
 package com.ex003;
 
-import java.sql.Time;
 
 public class VetorNotasOtimizado implements IVetor{
-	private double notas[] = new double[5];
-	private int totalNotas = 0;
-	
-	public void adiciona(double nota) {
-		this.notas[totalNotas] = nota;
-		totalNotas++;
-	}
-	
-	public int tamanho() {
-		return totalNotas;
-	}
-	
-	public boolean contem(double nota) {
-		for (int i = 0; i < totalNotas; i++){
-			if
+
+private Object vetor[] = new Object[5];
+
+private int totalObjetos = 0;
+@Override
+public void adiciona(double obj) {
+	this.vetor[totalObjetos] = obj;
+	totalObjetos++;
+}
+
+public void adiciona(Object obj) {
+	this.vetor[totalObjetos] = obj;
+	totalObjetos++;
+}
+
+public int tamanho() {
+	return totalObjetos;
+}
+
+
+public boolean contem(double nota) {
+for(int i=0; i < this.totalObjetos; i++) {
+	if(this.vetor[i] != null) {
+		if(this.vetor[i] instanceof Aluno){
+			Aluno a = (Aluno) this.vetor[i];
+			if(a.getNota() == nota) {
+				return true;
+			}
+		} else if(this.vetor[i] instanceof Double){
+			Double n = (Double) this.vetor[i];
+			if(n.doubleValue() == nota) {
+				return true;
+			}
 		}
 	}
+}
+return false;
+}
 
-	public boolean cheio() {
-		return totalNotas == notas.length;
+public boolean contem(String nome) {
+	for(int i=0; i < this.totalObjetos; i++) {
+		if(this.vetor[i] != null) {
+			if(this.vetor[i] instanceof Aluno){
+				Aluno a = (Aluno) this.vetor[i];
+				if(a.getNome().equals(nome)) {
+					return true;
+				}
+			}
+		}
 	}
-	
-	
+	return false;
+}
+
+public boolean contem(Object obj) {
+	for(int i=0; i < this.totalObjetos; i++) {
+		if(this.vetor[i] != null) {
+			if(this.vetor[i].equals(obj)) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+
+public boolean cheio() {
+	if(this.totalObjetos == this.vetor.length) {
+		return true;
+	}
+	return false;
+}
+
+public boolean remove(double elem) {
+	if(this.contem(elem)) {
+		for(int i=0; i < this.totalObjetos; i++) {
+			if(this.vetor[i] != null) {
+				if(this.vetor[i] instanceof Aluno){
+					Aluno a = (Aluno) this.vetor[i];
+					if(a.getNota() == elem) {
+						this.vetor[i] = null;
+						totalObjetos--;
+						return true;
+					}
+				}else if(this.vetor[i] instanceof Double){
+					Double n = (Double) this.vetor[i];
+					if(n.doubleValue() == elem) {
+						this.vetor[i] = null;
+						totalObjetos--;
+						return true;
+					}
+				}
+			}
+		}
+	}
+	return false;
+}
+
+
+public boolean remove(Object object){
+	if(this.contem(object)) {
+		for(int i=0; i < this.totalObjetos; i++) {
+			if(this.vetor[i] != null) {
+				if(this.vetor[i].equals(object)) {
+					this.vetor[i] = null;
+					totalObjetos--;
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
 }
